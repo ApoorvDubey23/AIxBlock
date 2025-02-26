@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 
-app.get("/webhook", (req, res) => {
+app.post("/webhook", (req, res) => {
     const data=req.body;
     console.log("Webhook Data Received:",data);
 
