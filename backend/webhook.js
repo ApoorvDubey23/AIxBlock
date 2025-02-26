@@ -22,7 +22,7 @@ app.post("/webhook", (req, res) => {
     console.log("Webhook Data Received:",data);
 
     // 🔴 Emit received data to all connected frontend clients
-    io.emit("dataReceive", {data:data,reqb:req.body});
+    io.emit("dataReceive", {data:data});
 
     // Save the latest webhook data
     // latestWebhookData = req.body;
