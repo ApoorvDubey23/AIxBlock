@@ -23,10 +23,12 @@ function App() {
                 const convertedData = await axios.post("https://aixblock-1.onrender.com/convert", { data: data });
                 console.log("✅ Data Converted",convertedData.data.result);
                 setResponseData(convertedData.data.result);
+                setLoading(false);
             } catch (error) {
                 console.error("❌ Conversion Error:", error);
                 setErrorMsg("Failed to process data.");
             } 
+
         };
 
         socket.on("dataReceive", handleDataReceive);
@@ -49,6 +51,7 @@ function App() {
 
         try {
             const pageUrl = await  getTab();
+          
             console.log("🔹 Current Tab URL:", pageUrl);
 
             const predictionRequest = await axios.post("https://multiagent.aixblock.io/api/v1/execute/result/67bdac48471a83f0355e05d7", {
@@ -66,7 +69,7 @@ function App() {
     return (
         <div className="max-h-screen flex flex-col items-center justify-center bg-gray-950 text-white p-2">
         {/* 🔹 Header */}
-        <h1 className="text-2xl font-bold mb-2">📢 OG Insights</h1>
+        <h1 className="text-xl font-bold mb-2">📢 OG Insights</h1>
         <p className="text-gray-400 text-md mb-6">Get AI-generated analysis on key topics</p>
     
         {/* 🔹 Predict Button */}
@@ -94,7 +97,7 @@ function App() {
         {/* 🔹 Response Data Display */}
         {responseData && (
             <div className="mt-6 overflow-auto max-h-[500px]  max-w-3xl bg-black p-6 rounded-lg text-sm shadow-xl border border-gray-700">
-                <h3 className="text-2xl text-left font-semibold mb-4">{responseData.title?responseData.title:"No Title"}</h3>
+                <h3 className="text-xl text-left font-semibold mb-4">{responseData.title?responseData.title:"No Title"}</h3>
     
                 {/* 🔹 Summary */}
                 <p className="text-gray-300 text-left text-md mb-4 leading-relaxed">{responseData.summary?
@@ -104,14 +107,14 @@ function App() {
                 {/* 🔹 Key Highlights */}
                 <h4 className="text-lg font-semibold text-left mt-4 border-b border-gray-700 pb-2">🔹 Key Highlights</h4>
                 <ul className="list-disc text-left pl-5 text-gray-300 text-md mt-2 space-y-1">
-                    {responseData.keyHighlights.length>0?responseData.keyHighlights.map((point, index) => (
+                    {responseData.keyHighlights&& responseData.keyHighlights.length>0?responseData.keyHighlights.map((point, index) => (
                         <li key={index}>{point}</li>
                     )):" Sorry , No Key Highlights"}
                 </ul>
                  {/* 🔹 Important Data Points */}
                  <h4 className="text-lg font-semibold text-left mt-4 border-b border-gray-700 pb-2">📊 Important Data</h4>
                     <ul className="list-disc pl-5 text-left text-gray-300 text-sm">
-                        {responseData.importantDataPoints.length>0?responseData.importantDataPoints.map((data, index) => (
+                        {responseData.importantDataPoints&& responseData.importantDataPoints.length>0?responseData.importantDataPoints.map((data, index) => (
                             <li key={index}>
                                 {data}
                             </li>
@@ -129,7 +132,7 @@ function App() {
                 {/* 🔹 Relevant Links */}
                 <h4 className="text-lg text-left font-semibold mt-4 border-b border-gray-700 pb-2">🔗 Relevant Links</h4>
                 <ul className="pl-5 text-left text-gray-300 text-md mt-2 space-y-2">
-                    {responseData.relevantLinks.length > 0 ? (
+                    {responseData.relevantLinks&& responseData.relevantLinks.length > 0 ? (
                         responseData.relevantLinks.map((link, index) => (
                             <li key={index} className="flex items-center">
                                 <ExternalLink size={16} className="mr-2 text-blue-400" />
