@@ -19,10 +19,10 @@ function App() {
         // ✅ Listen for WebSocket messages
         const handleDataReceive = async(data) => {
             console.log("🚀 Data Received from Webhook:,converting",data);
-            const convertedData=await axios.post("http://127.0.0.1:5001/convert",{data:data});
+            const convertedData=await axios.post("https://aixblock-1.onrender.com/convert",{data:data});
             console.log("converted");
             
-            console.log(convertedData);
+            console.log(convertedData.data.result);
             
             setResponseData(convertedData); // Update UI with received data
         };

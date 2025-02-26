@@ -37,18 +37,8 @@ def process_json(data):
     data = extract_data(data)  # ✅ Unwrap nested 'data'
 
     cleaned_result = clean_json_string(data.get("result", ""))
-
-    # ✅ Process 'task_output' if it exists
-    task_output = data.get("task_output", [])
-    if isinstance(task_output, list):
-        for task in task_output:
-            if isinstance(task.get("result"), str):
-                task["result"] = clean_json_string(task["result"])
-
     cleaned_data = {
-        "name": data.get("name", "Unknown Task"),
-        "result": cleaned_result,  # ✅ Cleaned main 'result' field
-        "task_output": task_output  # ✅ Cleaned 'task_output' results
+        "result": cleaned_result,
     }
 
     print("📤 Processed JSON Output:", json.dumps(cleaned_data, indent=4))  # ✅ Debugging output data
