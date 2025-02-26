@@ -1,12 +1,23 @@
 {
     "manifest_version": 3,
-    "name": "React Chrome Extension",
+    "name": "OG Insights",
     "version": "1.0.0",
-    "description": "A simple React app as a Chrome extension",
-    "permissions": ["tabs", "activeTab"],
-    "host_permissions": ["<all_urls>"],
+    "description": "OG Insights provides AI-generated analysis directly on the webpage.",
     "action": {
-      "default_popup": "index.html"
-    }
+      "default_title": "OG Insights",
+      "default_icon": {
+        "16": "insight_2644450.png",
+        "48": "insight_2644450.png",
+        "128": "insight_2644450.png"
+      }
+    },
+    "icons": {
+      "16": "insight_2644450.png",
+      "48": "insight_2644450.png",
+      "128": "insight_2644450.png"
+    },
+ "permissions": ["tabs","scripting", "activeTab", "storage"],
+    "host_permissions": ["<all_urls>"]
+  
   }
   
