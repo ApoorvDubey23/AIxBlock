@@ -18,8 +18,8 @@ app.use(cors());
 
 
 app.get("/webhook", (req, res) => {
-    console.log("Webhook Data Received:");
     const data=req.body;
+    console.log("Webhook Data Received:",data);
 
     // 🔴 Emit received data to all connected frontend clients
     io.emit("dataReceive", {data:data,reqb:req.body});
